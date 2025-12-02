@@ -20,6 +20,7 @@ public class MenuOptions extends JFrame {
         
         cardLayout = new CardLayout();
         mainPanel =  new JPanel(cardLayout);
+        gameScreen = new GameScreen();
         
         //crear el panel del menu
         JPanel menuPanel = createMenuPanel();
@@ -44,12 +45,17 @@ public class MenuOptions extends JFrame {
 	    startButton.setFocusPainted(true);
 	    startButton.setOpaque(true);
 	    startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Cambiar a la pantalla del juego
-                cardLayout.show(mainPanel, "Game");
-            }
-        });
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            // Solo agregamos el panel si no fue agregado antes
+	            if (gameScreen.getParent() == null) {
+	                mainPanel.add(gameScreen, "Game");
+	            }
+	            // Mostramos la pantalla del juego
+	            cardLayout.show(mainPanel, "Game");
+	        }
+	    });
+
 	    
 	    // Botón de exit
 	    JButton exitButton = new JButton("EXIT");
